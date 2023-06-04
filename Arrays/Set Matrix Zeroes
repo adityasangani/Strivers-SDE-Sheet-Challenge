@@ -1,5 +1,5 @@
 Problem link: https://leetcode.com/problems/set-matrix-zeroes/description/
-//The approach which has a space complexity of O(n+M):
+//The approach which has a space complexity of O(n+m):
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
