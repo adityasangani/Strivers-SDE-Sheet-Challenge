@@ -1,0 +1,33 @@
+Problem link: https://leetcode.com/problems/merge-sorted-array/
+//using extra space
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int left = 0;
+        int right = m-1;
+        int low = 0;
+        int high = n-1;
+        vector<int> temp;
+        while(left<=right && low<=high){
+            if(nums1[left]<=nums2[low]){
+                temp.push_back(nums1[left]);
+                left++;
+            }
+            else{
+                temp.push_back(nums2[low]);
+                low++;
+            }
+        }
+        while(left<=right){
+            temp.push_back(nums1[left]);
+            left++;
+        }
+        while(low<=high){
+            temp.push_back(nums2[low]);
+            low++;
+        }
+        for(int i=0; i<temp.size(); i++){
+            nums1[i] = temp[i];
+        }
+    }
+};
