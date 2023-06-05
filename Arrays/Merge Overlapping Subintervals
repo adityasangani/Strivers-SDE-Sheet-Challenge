@@ -1,0 +1,26 @@
+Problem link: https://leetcode.com/problems/merge-intervals/description/
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
+        sort(intervals.begin(), intervals.end());
+        int n = intervals.size();
+        if(n==1) return intervals;
+        int prev= 0; 
+        ans.push_back(intervals[0]);
+        for(int i=1; i<n; i++){
+            //if they are overlapping
+            if(intervals[i][0]<=ans[prev][1]){ 
+                ans[prev][1] = max(ans[prev][1], intervals[i][1]);
+                continue;
+            }
+            //if they aren't overlapping
+            else{
+                ans.push_back(intervals[i]);
+            }
+            prev++;
+
+        }
+        return ans;
+    }
+};
