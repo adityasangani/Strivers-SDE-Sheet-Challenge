@@ -1,0 +1,43 @@
+Problem link: https://leetcode.com/problems/unique-paths/description/
+//DP solution
+class Solution {
+public:
+    int t[101][101];
+    int uniquePaths(int m, int n) {
+        memset(t, -1, sizeof(t));
+        return solve(0, 0, m, n);
+    }
+
+    int solve(int row, int col, int m, int n){
+        if(row==m-1 && col== n-1){
+            return 1;
+        }
+        else if(t[row][col]!=-1) return t[row][col];
+        else if(row<m-1 && col<n-1){
+            t[row][col] = solve(row+1, col, m, n) + solve(row, col+1, m, n);
+        }
+        else if(row<m-1){
+            t[row][col] = solve(row+1, col, m, n);
+        }
+        else if(col<n-1){
+            t[row][col] = solve(row, col+1, m, n);
+        }
+        return t[row][col];
+    }
+};
+
+//combinatrics solution
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        //combinatrics approach
+        int N = m + n-2;
+        int r = m-1;
+        double res =1;
+        for(int i=1; i<=r; i++){
+            res = res * (N-r+i);
+            res = res/(i);
+        }
+        return (int)res;
+    }
+};
