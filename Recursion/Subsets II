@@ -1,0 +1,27 @@
+Problem link: https://leetcode.com/problems/subsets-ii/description/
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<int> op;
+        set<vector<int>> st;
+        solve(nums, 0, op, st);
+        vector<vector<int>> ans;
+        for(auto it : st){
+            ans.push_back(it);
+        }
+        return ans;
+    }
+
+    void solve(vector<int>& nums, int i, vector<int>& op, set<vector<int>>& st){
+        if(i==nums.size()){
+            st.insert(op);
+            return;
+        }
+        vector<int> op1 = op;
+        vector<int> op2 = op;
+        op2.push_back(nums[i]);
+        solve(nums, i+1, op1, st);
+        solve(nums, i+1, op2, st);
+    }
+};
