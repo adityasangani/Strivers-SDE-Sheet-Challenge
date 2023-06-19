@@ -1,0 +1,26 @@
+Problem link: https://leetcode.com/problems/combination-sum/description/
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> op;
+        vector<vector<int>> ans;
+        solve(candidates, 0, target, op, ans);
+        return ans;
+    }
+    void solve(vector<int>& candidates, int i, int target, vector<int>& op, vector<vector<int>>& ans){
+        if(target==0){
+            ans.push_back(op);
+            return;
+        }
+        if(target<0 || i==candidates.size()){
+            return;
+        }
+
+        vector<int> op1 = op;
+        vector<int> op2 = op;
+        op2.push_back(candidates[i]);
+        solve(candidates, i+1, target, op1, ans);
+        solve(candidates, i, target-candidates[i], op2, ans);
+        return;
+    }
+};
